@@ -1,0 +1,12 @@
+export const DIGITAL_TWIN_FILE_MODEL_TYPE = 'Digital twin';
+export const DIGITAL_TWIN_SET_DEFAULT = 'Set as system default Digital Twin';
+export const DIGITAL_TWIN_SET_DEFAULT_DESCRIPTION = 'Set this digital twin as the system default Digital Twin';
+export const DIGITAL_TWIN_SET_DEFAULT_CONFIRM = 'Please confim to set this Digital twin as the system default.';
+export const DIGITAL_TWIN_SET_DEFAULT_CONFIRM_ARIA = `Confirm ${DIGITAL_TWIN_SET_DEFAULT_DESCRIPTION}`;
+export const DIGITAL_TWIN_DEFAULT_DIRECTORY_PATH = '__users__/public/digital_twin';
+export const DIGITAL_TWIN_DEFAULT_FILE_NAME = 'default';
+export const DIGITAL_TWIN_DEFAULT_FILE_PATH = `${DIGITAL_TWIN_DEFAULT_DIRECTORY_PATH}/${DIGITAL_TWIN_DEFAULT_FILE_NAME}`;
+export const DIGITAL_TWIN_MODEL_TYPE = 'Digital twin';
+export const DIGITAL_TWIN_DEFAULT_CANCEL_LOG = 'Cancel set digital twin as default';
+export const DIGITAL_TWIN_DEFAULT_DONE = 'Digital Twin set as system default successfuly.';
+export const DIGITAL_TWIN_DEFAULT_ALREADY_SAME = 'This Digital Twin is already set as the system default.';
