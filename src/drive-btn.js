@@ -9,7 +9,7 @@ import {
   DIGITAL_TWIN_DEFAULT_CANCEL_LOG,
   DIGITAL_TWIN_DEFAULT_DONE,
   DIGITAL_TWIN_DEFAULT_ALREADY_SAME
-} from './contant';
+} from './constant';
 import './defaultDigitalTwinService';
 const spinalEnvDriveCore = require('spinal-env-drive-core');
 const angular = require('angular');
@@ -23,7 +23,7 @@ angular
       class SpinalDriveAppFileExplorerSetDefaultDigitalTwin extends
         spinalEnvDriveCore.SpinalDrive_App {
         constructor() {
-          super('OpenDigitalTwinManager', DIGITAL_TWIN_SET_DEFAULT,
+          super(DIGITAL_TWIN_SET_DEFAULT, DIGITAL_TWIN_SET_DEFAULT,
             38, 'settings_applications', DIGITAL_TWIN_SET_DEFAULT_DESCRIPTION);
           this.order_priority = 0;
 
@@ -44,6 +44,7 @@ angular
             if (done) { $mdToast.simple(DIGITAL_TWIN_DEFAULT_DONE); }
             else { $mdToast.simple(DIGITAL_TWIN_DEFAULT_ALREADY_SAME); }
           } catch (e) {
+            console.log(e);
             console.log(DIGITAL_TWIN_DEFAULT_CANCEL_LOG);
           }
         }

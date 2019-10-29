@@ -6,7 +6,7 @@ import {
   DIGITAL_TWIN_DEFAULT_DIRECTORY_PATH,
   DIGITAL_TWIN_DEFAULT_FILE_NAME,
   DIGITAL_TWIN_MODEL_TYPE
-} from './contant';
+} from './constant';
 
 import { FileVersionContainerModel } from 'spinal-model-file_version_model';
 
@@ -18,9 +18,9 @@ angular
     function () {
       const mapModelDictionary = new Map();
 
-      function loadModel(model) {
+      function loadModelPtr(model) {
         if (model instanceof File) {
-          return this.loadModelPtr(model._ptr);
+          return loadModelPtr(model._ptr);
         }
         if (!(model instanceof Ptr)) {
           throw new Error('loadModelPtr must take Ptr as parameter');
@@ -80,24 +80,27 @@ angular
       }
 
       async function setDefaultDigitalTwin(fileModel) {
-        const digitalTwinModel = await loadModel(fileModel);
+        const digitalTwinModel = await loadModelPtr(fileModel);
         const currentDir = await getPublicDir();
         const file = currentDir.detect((x) => x.name.get() === DIGITAL_TWIN_DEFAULT_FILE_NAME);
         if (file) {
           // file exist
-          if (getFileTargetServerId() === digitalTwinModel._server_id) return false;
-          const fvc = await FileVersionContainerModel.getVersionModelFromFile(fileModel);
+          if (getFileTargetServerId(file) === digitalTwinModel._server_id) return false;
+          const fvc = await FileVersionContainerModel.getVersionModelFromFile(file);
           fvc.addVersion(digitalTwinModel, DIGITAL_TWIN_DEFAULT_FILE_NAME);
           return true;
         } else {
           // file doesn't exist
           currentDir.add_file(DIGITAL_TWIN_DEFAULT_FILE_NAME, digitalTwinModel, { model_type: DIGITAL_TWIN_MODEL_TYPE });
+          const file = currentDir.detect((x) => x.name.get() === DIGITAL_TWIN_DEFAULT_FILE_NAME);
+          const fvc = await FileVersionContainerModel.getVersionModelFromFile(file);
+          fvc.addVersion(digitalTwinModel, DIGITAL_TWIN_DEFAULT_FILE_NAME);
           return true;
         }
       }
 
       return {
-        loadModel,
+        loadModelPtr,
         normalisePath,
         getPublicDir,
         getFileTargetServerId,
